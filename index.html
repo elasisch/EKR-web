@@ -424,6 +424,15 @@
             border-radius: 15px;
         }
 
+        .single-scenario-section {
+            grid-column: 1 / -1;
+            margin-top: 30px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 6px solid #8e44ad;
+        }
+
         .pie-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -1366,6 +1375,218 @@
             `;
             
             createComparisonChart();
+            createDetailedCostBreakdown();
+            createPieCharts();
+        }
+
+        function createDetailedCostBreakdown() {
+            let costBreakdownSection = document.getElementById('costBreakdownSection');
+            if (!costBreakdownSection) {
+                costBreakdownSection = document.createElement('div');
+                costBreakdownSection.id = 'costBreakdownSection';
+                costBreakdownSection.className = 'comparison-section';
+                document.querySelector('.main-content').appendChild(costBreakdownSection);
+            }
+            
+            costBreakdownSection.innerHTML = `
+                <h2>💰 Detaillierte Kostenaufstellung aller Szenarien</h2>
+                
+                <div class="fee-breakdown">
+                    ${scenarios.map((scenario, index) => `
+                        <div class="fee-card">
+                            <h4>${scenario.name}</h4>
+                            <div class="fee-item">
+                                <span>💰 Einmalige Investition:</span>
+                                <strong>${formatCurrency(scenario.initialInvestment)}</strong>
+                            </div>
+                            <div class="fee-item">
+                                <span>💳 Monatliche Sparrate:</span>
+                                <strong>${formatCurrency(scenario.monthlySavings)} × ${scenario.durationYears * 12} Monate</strong>
+                            </div>
+                            <div class="fee-item" style="border-bottom: 2px solid #8e44ad;">
+                                <span><strong>📊 Gesamte Einzahlungen:</strong></span>
+                                <strong style="color: #8e44ad;">${formatCurrency(scenario.totalPayments)}</strong>
+                            </div>
+                            
+                            <div class="fee-item">
+                                <span>📈 Brutto-Gewinn:</span>
+                                <strong style="color: #27ae60;">+${formatCurrency(scenario.finalCapital - scenario.totalPayments)}</strong>
+                            </div>
+                            <div class="fee-item">
+                                <span>🏛️ KESt (${(scenario.taxRate * 100).toFixed(1)}%):</span>
+                                <strong style="color: #e74c3c;">-${formatCurrency(scenario.totalTax)}</strong>
+                            </div>
+                            <div class="fee-item">
+                                <span>💼 TER-Gebühren (${scenario.terPercent}% p.a.):</span>
+                                <strong style="color: #f39c12;">-${formatCurrency(scenario.totalTerFees)}</strong>
+                            </div>
+                            ${scenario.totalInsuranceTax > 0 ? `
+                            <div class="fee-item">
+                                <span>🏦 Versicherungssteuer (4%):</span>
+                                <strong style="color: #3498db;">-${formatCurrency(scenario.totalInsuranceTax)}</strong>
+                            </div>
+                            ` : ''}
+                            <div class="fee-item" style="border-top: 3px solid #8e44ad; font-weight: bold; font-size: 1.1em; color: #8e44ad;">
+                                <span>🏆 Netto-Endwert:</span>
+                                <strong>${formatCurrency(scenario.netFinalValue)}</strong>
+                            </div>
+                            
+                            <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #eee;">
+                                <div class="fee-item">
+                                    <span>📊 Rendite-Faktor:</span>
+                                    <strong style="color: #27ae60;">${(scenario.netFinalValue / scenario.totalPayments).toFixed(2)}x</strong>
+                                </div>
+                                <div class="fee-item">
+                                    <span>📈 Effektive Steuerrate:</span>
+                                    <strong>${scenario.profit > 0 ? ((scenario.totalTax / scenario.profit) * 100).toFixed(2) : 0}%</strong>
+                                </div>
+                                <div class="fee-item">
+                                    <span>⏱️ Laufzeit:</span>
+                                    <strong>${scenario.durationYears} Jahre</strong>
+                                </div>
+                                <div class="fee-item">
+                                    <span>💹 Brutto-Rendite p.a.:</span>
+                                    <strong>${scenario.grossReturnPercent}%</strong>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+
+                <h3>📊 Kostenvergleich in Tabellenform</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Kostenart</th>
+                            ${scenarios.map(scenario => `<th>${scenario.name}</th>`).join('')}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="Kostenart"><strong>💰 Einzahlungen gesamt</strong></td>
+                            ${scenarios.map(scenario => `<td data-label="${scenario.name}">${formatCurrency(scenario.totalPayments)}</td>`).join('')}
+                        </tr>
+                        <tr>
+                            <td data-label="Kostenart"><strong>📈 Brutto-Gewinn</strong></td>
+                            ${scenarios.map(scenario => `<td data-label="${scenario.name}" style="color: #27ae60;">${formatCurrency(scenario.finalCapital - scenario.totalPayments)}</td>`).join('')}
+                        </tr>
+                        <tr>
+                            <td data-label="Kostenart"><strong>🏛️ KESt-Steuern</strong></td>
+                            ${scenarios.map(scenario => `<td data-label="${scenario.name}" style="color: #e74c3c;">-${formatCurrency(scenario.totalTax)}</td>`).join('')}
+                        </tr>
+                        <tr>
+                            <td data-label="Kostenart"><strong>💼 TER-Gebühren</strong></td>
+                            ${scenarios.map(scenario => `<td data-label="${scenario.name}" style="color: #f39c12;">-${formatCurrency(scenario.totalTerFees)}</td>`).join('')}
+                        </tr>
+                        ${scenarios.some(s => s.totalInsuranceTax > 0) ? `
+                        <tr>
+                            <td data-label="Kostenart"><strong>🏦 Versicherungssteuer</strong></td>
+                            ${scenarios.map(scenario => `<td data-label="${scenario.name}" style="color: #3498db;">-${formatCurrency(scenario.totalInsuranceTax || 0)}</td>`).join('')}
+                        </tr>
+                        ` : ''}
+                        <tr style="background: #e8e5f0; font-weight: bold;">
+                            <td data-label="Kostenart"><strong>🏆 Netto-Endwert</strong></td>
+                            ${scenarios.map(scenario => `<td data-label="${scenario.name}" style="color: #8e44ad; font-weight: bold;">${formatCurrency(scenario.netFinalValue)}</td>`).join('')}
+                        </tr>
+                        <tr>
+                            <td data-label="Kostenart"><strong>📊 Rendite-Faktor</strong></td>
+                            ${scenarios.map(scenario => `<td data-label="${scenario.name}" style="color: #27ae60;">${(scenario.netFinalValue / scenario.totalPayments).toFixed(2)}x</td>`).join('')}
+                        </tr>
+                        <tr>
+                            <td data-label="Kostenart"><strong>📈 Effektive Steuerrate</strong></td>
+                            ${scenarios.map(scenario => `<td data-label="${scenario.name}">${scenario.profit > 0 ? ((scenario.totalTax / scenario.profit) * 100).toFixed(2) : 0}%</td>`).join('')}
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+        }
+
+        function createPieCharts() {
+            let pieSection = document.getElementById('pieSection');
+            if (!pieSection) {
+                pieSection = document.createElement('div');
+                pieSection.id = 'pieSection';
+                pieSection.className = 'pie-section';
+                document.querySelector('.main-content').appendChild(pieSection);
+            }
+            
+            pieSection.innerHTML = `
+                <h2>🥧 Kostenaufstellung pro Szenario</h2>
+                <div class="pie-grid">
+                    ${scenarios.map((scenario, index) => `
+                        <div class="pie-container">
+                            <h4>${scenario.name}</h4>
+                            <p>Netto-Endwert: ${formatCurrency(scenario.netFinalValue)}</p>
+                            <canvas id="pieChart${index}"></canvas>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            
+            scenarios.forEach((scenario, index) => {
+                createPieChart(scenario, index);
+            });
+        }
+
+        function createPieChart(scenario, index) {
+            const ctx = document.getElementById(`pieChart${index}`).getContext('2d');
+            
+            const totalInvestment = scenario.totalPayments;
+            const grossProfit = scenario.finalCapital - scenario.totalPayments;
+            const capitalGainsTax = scenario.totalTax;
+            const terFees = scenario.totalTerFees;
+            const insuranceTax = scenario.totalInsuranceTax || 0;
+            const netProfit = grossProfit - capitalGainsTax - terFees;
+            
+            const data = {
+                labels: ['💰 Einzahlungen', '📈 Netto-Gewinn', '🏛️ KESt', '💼 TER-Gebühren'],
+                datasets: [{
+                    data: [totalInvestment, netProfit, capitalGainsTax, terFees],
+                    backgroundColor: [
+                        '#8e44ad',  // Purple for investments
+                        '#27ae60',  // Green for net profit
+                        '#e74c3c',  // Red for taxes
+                        '#f39c12'   // Orange for fees
+                    ],
+                    borderWidth: 2,
+                    borderColor: '#ffffff'
+                }]
+            };
+            
+            if (insuranceTax > 0) {
+                data.labels.push('🏦 Versicherungssteuer');
+                data.datasets[0].data.push(insuranceTax);
+                data.datasets[0].backgroundColor.push('#3498db'); // Blue for insurance tax
+            }
+            
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: data,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 15,
+                                usePointStyle: true,
+                                font: { size: 11 }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const value = context.parsed;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = ((value / total) * 100).toFixed(1);
+                                    return `${context.label}: ${formatCurrency(value)} (${percentage}%)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
         }
 
         function createComparisonChart() {
@@ -1438,6 +1659,178 @@
 
             createChart(scenario);
             createYearlyTable(scenario);
+            createSingleScenarioPieChart(scenario);
+        }
+
+        function createSingleScenarioPieChart(scenario) {
+            let singlePieSection = document.getElementById('singlePieSection');
+            if (!singlePieSection) {
+                singlePieSection = document.createElement('div');
+                singlePieSection.id = 'singlePieSection';
+                singlePieSection.className = 'comparison-section'; // Verwende die gleiche Klasse für volle Breite
+                document.querySelector('.main-content').appendChild(singlePieSection); // Unter der main-content hinzufügen
+            }
+            
+            singlePieSection.innerHTML = `
+                <h2>🥧 Kostenaufstellung für ${scenario.name}</h2>
+                <div class="fee-breakdown">
+                    <div class="fee-card">
+                        <h4>💰 Übersicht Kapitalverteilung</h4>
+                        <div class="fee-item">
+                            <span>Gesamte Einzahlungen:</span>
+                            <strong>${formatCurrency(scenario.totalPayments)}</strong>
+                        </div>
+                        <div class="fee-item">
+                            <span>Brutto-Gewinn:</span>
+                            <strong style="color: #27ae60;">${formatCurrency(scenario.finalCapital - scenario.totalPayments)}</strong>
+                        </div>
+                        <div class="fee-item">
+                            <span>KESt (${(scenario.taxRate * 100).toFixed(1)}%):</span>
+                            <strong style="color: #e74c3c;">-${formatCurrency(scenario.totalTax)}</strong>
+                        </div>
+                        <div class="fee-item">
+                            <span>TER-Gebühren (${scenario.terPercent}% p.a.):</span>
+                            <strong style="color: #f39c12;">-${formatCurrency(scenario.totalTerFees)}</strong>
+                        </div>
+                        ${scenario.totalInsuranceTax > 0 ? `
+                        <div class="fee-item">
+                            <span>Versicherungssteuer (4%):</span>
+                            <strong style="color: #3498db;">-${formatCurrency(scenario.totalInsuranceTax)}</strong>
+                        </div>
+                        ` : ''}
+                        <div class="fee-item" style="border-top: 2px solid #8e44ad; font-weight: bold; color: #8e44ad;">
+                            <span>Netto-Endwert:</span>
+                            <strong>${formatCurrency(scenario.netFinalValue)}</strong>
+                        </div>
+                    </div>
+                    
+                    <div class="fee-card">
+                        <h4>📊 Effektive Steuerbelastung</h4>
+                        <div class="fee-item">
+                            <span>Brutto-Rendite p.a.:</span>
+                            <strong>${scenario.grossReturnPercent}%</strong>
+                        </div>
+                        <div class="fee-item">
+                            <span>TER-Belastung p.a.:</span>
+                            <strong>${scenario.terPercent}%</strong>
+                        </div>
+                        <div class="fee-item">
+                            <span>Effektive Steuerrate:</span>
+                            <strong>${scenario.profit > 0 ? ((scenario.totalTax / scenario.profit) * 100).toFixed(2) : 0}%</strong>
+                        </div>
+                        <div class="fee-item">
+                            <span>Rendite-Faktor:</span>
+                            <strong style="color: #27ae60;">${(scenario.netFinalValue / scenario.totalPayments).toFixed(2)}x</strong>
+                        </div>
+                        <div class="fee-item">
+                            <span>⏱️ Laufzeit:</span>
+                            <strong>${scenario.durationYears} Jahre</strong>
+                        </div>
+                        <div class="fee-item">
+                            <span>💹 Einmalinvestition:</span>
+                            <strong>${formatCurrency(scenario.initialInvestment)}</strong>
+                        </div>
+                        <div class="fee-item">
+                            <span>💳 Monatliche Sparrate:</span>
+                            <strong>${formatCurrency(scenario.monthlySavings)}</strong>
+                        </div>
+                    </div>
+                    
+                    <div class="fee-card">
+                        <h4>🎯 Kostenvergleich</h4>
+                        <div class="fee-item">
+                            <span>💰 Einzahlungen vs. Endwert:</span>
+                            <strong>${formatCurrency(scenario.totalPayments)} → ${formatCurrency(scenario.netFinalValue)}</strong>
+                        </div>
+                        <div class="fee-item">
+                            <span>📈 Absolute Rendite:</span>
+                            <strong style="color: #27ae60;">+${formatCurrency(scenario.netFinalValue - scenario.totalPayments)}</strong>
+                        </div>
+                        <div class="fee-item">
+                            <span>💸 Gesamtkosten (Steuern + Gebühren):</span>
+                            <strong style="color: #e74c3c;">-${formatCurrency(scenario.totalTax + scenario.totalTerFees + (scenario.totalInsuranceTax || 0))}</strong>
+                        </div>
+                        <div class="fee-item">
+                            <span>📊 Kostenquote am Gewinn:</span>
+                            <strong>${scenario.profit > 0 ? (((scenario.totalTax + scenario.totalTerFees) / scenario.profit) * 100).toFixed(2) : 0}%</strong>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3 style="text-align: center; margin: 30px 0 20px 0;">📊 Visuelle Kapitalverteilung</h3>
+                <div style="display: flex; justify-content: center; max-width: 500px; margin: 0 auto;">
+                    <div class="pie-container" style="width: 100%; max-width: 450px;">
+                        <canvas id="singlePieChart"></canvas>
+                    </div>
+                </div>
+            `;
+            
+            // Warte kurz, bevor das Chart erstellt wird
+            setTimeout(() => {
+                const ctx = document.getElementById('singlePieChart');
+                if (ctx) {
+                    createSinglePieChartCanvas(ctx.getContext('2d'), scenario);
+                }
+            }, 100);
+        }
+
+        function createSinglePieChartCanvas(ctx, scenario) {
+            const totalInvestment = scenario.totalPayments;
+            const grossProfit = scenario.finalCapital - scenario.totalPayments;
+            const capitalGainsTax = scenario.totalTax;
+            const terFees = scenario.totalTerFees;
+            const insuranceTax = scenario.totalInsuranceTax || 0;
+            const netProfit = grossProfit - capitalGainsTax - terFees - insuranceTax;
+            
+            const data = {
+                labels: ['💰 Einzahlungen', '📈 Netto-Gewinn', '🏛️ KESt', '💼 TER-Gebühren'],
+                datasets: [{
+                    data: [totalInvestment, netProfit, capitalGainsTax, terFees],
+                    backgroundColor: [
+                        '#8e44ad',  // Purple for investments
+                        '#27ae60',  // Green for net profit
+                        '#e74c3c',  // Red for taxes
+                        '#f39c12'   // Orange for fees
+                    ],
+                    borderWidth: 2,
+                    borderColor: '#ffffff'
+                }]
+            };
+            
+            if (insuranceTax > 0) {
+                data.labels.push('🏦 Versicherungssteuer');
+                data.datasets[0].data.push(insuranceTax);
+                data.datasets[0].backgroundColor.push('#3498db');
+            }
+            
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: data,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 15,
+                                usePointStyle: true,
+                                font: { size: 12 }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const value = context.parsed;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = ((value / total) * 100).toFixed(1);
+                                    return `${context.label}: ${formatCurrency(value)} (${percentage}%)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
         }
 
         function createChart(scenario) {
