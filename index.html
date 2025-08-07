@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Ellenas Kapitalentwicklungs Rechner (EKR) - Web Edition</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -207,16 +207,6 @@
             display: none;
         }
 
-        @media (max-width: 768px) {
-            .main-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .summary-cards {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
         .kest-info {
             background: #fff3cd;
             border: 1px solid #ffeaa7;
@@ -332,6 +322,7 @@
         .comparison-table th:first-child {
             text-align: left;
         }
+        
         .ranking-section {
             grid-column: 1 / -1;
             margin-top: 30px;
@@ -417,7 +408,7 @@
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             margin-bottom: 30px;
-            height: 500px; /* Höher als normale Charts */
+            height: 500px;
         }
 
         .comparison-chart-container canvas {
@@ -459,6 +450,294 @@
             max-height: 300px;
         }
 
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                border-radius: 10px;
+                margin: 0;
+            }
+            
+            .header {
+                padding: 20px 15px;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+                margin-bottom: 8px;
+            }
+            
+            .header p {
+                font-size: 1em;
+            }
+            
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 20px 15px;
+            }
+            
+            .input-section {
+                padding: 20px 15px;
+            }
+            
+            .scenario-controls {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+            }
+            
+            .scenario-controls button {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+            
+            .scenario-navigation {
+                flex-direction: column;
+                gap: 10px;
+                padding: 15px 10px;
+            }
+            
+            .scenario-navigation button {
+                width: 100%;
+                padding: 12px 15px;
+            }
+            
+            #scenarioSelector {
+                width: 100%;
+                max-width: none;
+                margin: 5px 0;
+            }
+            
+            .input-group input, .input-group select {
+                font-size: 16px;
+                padding: 14px;
+            }
+            
+            .calculate-btn {
+                font-size: 16px;
+                padding: 18px;
+            }
+            
+            .summary-cards {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            
+            .summary-card {
+                padding: 15px 10px;
+            }
+            
+            .summary-card .value {
+                font-size: 1.4em;
+            }
+            
+            .chart-container {
+                padding: 15px 10px;
+            }
+            
+            .yearly-table h3 {
+                padding: 15px;
+                font-size: 1.1em;
+            }
+            
+            table {
+                font-size: 0.9em;
+            }
+            
+            th, td {
+                padding: 8px 4px;
+            }
+            
+            .comparison-section {
+                padding: 20px 15px;
+                margin-top: 20px;
+            }
+            
+            .comparison-table {
+                font-size: 0.8em;
+                overflow-x: auto;
+                display: block;
+                white-space: nowrap;
+            }
+            
+            .comparison-table thead,
+            .comparison-table tbody,
+            .comparison-table th,
+            .comparison-table td,
+            .comparison-table tr {
+                display: block;
+            }
+            
+            .comparison-table thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+            
+            .comparison-table tr {
+                border: 1px solid #ccc;
+                margin-bottom: 10px;
+                padding: 10px;
+                border-radius: 5px;
+                background: white;
+            }
+            
+            .comparison-table td {
+                border: none;
+                position: relative;
+                padding: 8px 8px 8px 25%;
+                text-align: left;
+                white-space: normal;
+            }
+            
+            .comparison-table td:before {
+                content: attr(data-label) ": ";
+                position: absolute;
+                left: 6px;
+                width: 20%;
+                padding-right: 10px;
+                white-space: nowrap;
+                font-weight: bold;
+                color: #8e44ad;
+            }
+            
+            .ranking-table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+            
+            .ranking-table thead,
+            .ranking-table tbody,
+            .ranking-table th,
+            .ranking-table td,
+            .ranking-table tr {
+                display: block;
+            }
+            
+            .ranking-table thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+            
+            .ranking-table tr {
+                border: 1px solid #ccc;
+                margin-bottom: 10px;
+                padding: 10px;
+                border-radius: 5px;
+                background: white;
+            }
+            
+            .ranking-table td {
+                border: none;
+                position: relative;
+                padding: 8px 8px 8px 25%;
+                text-align: left;
+                white-space: normal;
+            }
+            
+            .ranking-table td:before {
+                content: attr(data-label) ": ";
+                position: absolute;
+                left: 6px;
+                width: 20%;
+                padding-right: 10px;
+                white-space: nowrap;
+                font-weight: bold;
+                color: #8e44ad;
+            }
+            
+            .fee-breakdown {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .fee-card {
+                padding: 15px;
+            }
+            
+            .pie-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .pie-container canvas {
+                height: 250px !important;
+                max-height: 250px;
+            }
+            
+            .comparison-chart-container {
+                height: 300px;
+                padding: 15px 10px;
+            }
+            
+            .comparison-chart-container canvas {
+                max-height: 250px;
+            }
+            
+            .best-scenario {
+                padding: 15px;
+                font-size: 0.9em;
+            }
+            
+            .etf-type-group {
+                margin-left: 10px;
+                padding: 12px;
+            }
+            
+            .kest-info {
+                padding: 12px;
+                font-size: 0.85em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.5em;
+            }
+            
+            .header p {
+                font-size: 0.9em;
+            }
+            
+            .summary-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .summary-card {
+                padding: 12px 8px;
+            }
+            
+            .summary-card h3 {
+                font-size: 0.8em;
+            }
+            
+            .summary-card .value {
+                font-size: 1.3em;
+            }
+            
+            table {
+                font-size: 0.8em;
+            }
+            
+            th, td {
+                padding: 6px 2px;
+            }
+            
+            .input-group label {
+                font-size: 0.9em;
+            }
+            
+            .scenario-controls span {
+                font-size: 0.9em;
+                text-align: center;
+            }
+        }
     </style>
 </head>
 <body>
@@ -472,7 +751,7 @@
             <div class="input-section">
                 <h2 style="margin-bottom: 25px; color: #333;">📊 Szenario-Eingabe</h2>
 
-                 <div class="scenario-controls">
+                <div class="scenario-controls">
                     <button class="add-scenario-btn" onclick="addScenario()">➕ Neues Szenario</button>
                     <button class="compare-btn" onclick="compareScenarios()" id="compareBtn" disabled>📊 Szenarien vergleichen</button>
                     <button onclick="debugScenarios()" style="background: #8e44ad; color: white; padding: 10px; border: none; border-radius: 5px;">🐛 Debug</button>
@@ -542,7 +821,6 @@
                     <label for="grossReturn">Bruttorendite in % pro Jahr:</label>
                     <input type="number" id="grossReturn" value="7" min="0" max="20" step="0.5" />
                 </div>
-
             </div>
 
             <div class="results-section">
@@ -594,18 +872,16 @@
         </div>
     </div>
 
-     <script>
+    <script>
         let scenarios = [];
         let currentScenarioIndex = 0;
         let chart = null;
 
         // Initialisierung
         window.addEventListener('load', function() {
-            // Erstes Szenario erstellen
             scenarios = [createEmptyScenario("Szenario 1")];
             currentScenarioIndex = 0;
             
-            // Formular mit Standardwerten füllen (OHNE loadScenarioToForm)
             document.getElementById('scenarioName').value = "Szenario 1";
             document.getElementById('initialInvestment').value = 10000;
             document.getElementById('monthlySavings').value = 500;
@@ -616,8 +892,6 @@
             document.getElementById('grossReturn').value = 7;
             
             calculateScenario();
-            
-            // Event Listeners hinzufügen
             addEventListeners();
         });
 
@@ -636,21 +910,17 @@
         }
 
         function addEventListeners() {
-            // ETF Type toggle
             document.getElementById('capitalGainsTax').addEventListener('change', function() {
                 const etfSection = document.getElementById('etfTypeSection');
                 if (this.checked) {
                     etfSection.classList.remove('hidden');
-                    // Standard-ETF-Typ setzen
                     document.getElementById('etfType').value = '1';
                 } else {
                     etfSection.classList.add('hidden');
                 }
-                // Berechnung erst nach kurzer Verzögerung
                 setTimeout(() => calculateScenario(), 100);
             });
 
-            // Auto-calculate on input changes
             ['scenarioName', 'initialInvestment', 'monthlySavings', 'ter', 'durationYears', 'grossReturn'].forEach(id => {
                 document.getElementById(id).addEventListener('input', function() {
                     calculateScenario();
@@ -669,17 +939,13 @@
         }
 
         function addScenario() {
-            // Aktuelles Szenario ZUERST speichern
             saveCurrentScenario();
             
-            // Neues Szenario mit Standardwerten erstellen
             const newScenario = createEmptyScenario(`Szenario ${scenarios.length + 1}`);
             scenarios.push(newScenario);
             
-            // Zum neuen Szenario wechseln
             currentScenarioIndex = scenarios.length - 1;
             
-            // Formular mit neuen Standardwerten füllen
             document.getElementById('scenarioName').value = newScenario.name;
             document.getElementById('initialInvestment').value = newScenario.initialInvestment;
             document.getElementById('monthlySavings').value = newScenario.monthlySavings;
@@ -689,7 +955,6 @@
             document.getElementById('durationYears').value = newScenario.durationYears;
             document.getElementById('grossReturn').value = newScenario.grossReturnPercent;
             
-            // ETF Section ausblenden (da capitalGainsTax = false)
             document.getElementById('etfTypeSection').classList.add('hidden');
             
             updateScenarioSelector();
@@ -703,12 +968,9 @@
         function deleteCurrentScenario() {
             if (scenarios.length <= 1) return;
             
-            // Aktuelles Szenario speichern BEVOR gelöscht wird
             saveCurrentScenario();
-            
             scenarios.splice(currentScenarioIndex, 1);
             
-            // Szenarien neu nummerieren
             scenarios.forEach((scenario, index) => {
                 scenario.name = `Szenario ${index + 1}`;
             });
@@ -730,29 +992,26 @@
             scenarios.forEach((scenario, index) => {
                 const option = document.createElement('option');
                 option.value = index;
-                option.textContent = `${scenario.name} (${scenario.monthlySavings}€/Monat)`; // Debug-Info
+                option.textContent = `${scenario.name}`;
                 selector.appendChild(option);
             });
             
-            // Sicherstellen dass currentIndex gültig ist
             if (currentScenarioIndex >= scenarios.length) {
                 currentScenarioIndex = scenarios.length - 1;
             }
             
             selector.value = currentScenarioIndex;
         }
+
         function switchScenario(index) {
             const newIndex = parseInt(index);
             
-            // Nur speichern wenn wir zu einem anderen Szenario wechseln
             if (currentScenarioIndex !== newIndex && scenarios.length > 0) {
                 saveCurrentScenario();
             }
             
-            // Zu neuem Szenario wechseln
             currentScenarioIndex = newIndex;
             
-            // Sicherstellen dass Index gültig ist
             if (currentScenarioIndex >= scenarios.length) {
                 currentScenarioIndex = scenarios.length - 1;
             }
@@ -760,12 +1019,10 @@
                 currentScenarioIndex = 0;
             }
             
-            // Daten vom gewählten Szenario laden
             loadScenarioToForm(currentScenarioIndex);
             calculateScenario();
             updateNavigationButtons();
             
-            // Selector-Wert korrigieren
             document.getElementById('scenarioSelector').value = currentScenarioIndex;
             
             document.getElementById('scenarioCounter').textContent = 
@@ -819,7 +1076,6 @@
             document.getElementById('durationYears').value = scenario.durationYears;
             document.getElementById('grossReturn').value = scenario.grossReturnPercent;
             
-            // ETF Type richtig setzen
             if (scenario.capitalGainsTax) {
                 if (scenario.taxRate === 0.209) {
                     document.getElementById('etfType').value = '1';
@@ -828,7 +1084,6 @@
                 }
             }
             
-            // ETF Type Section toggle
             const etfSection = document.getElementById('etfTypeSection');
             if (scenario.capitalGainsTax) {
                 etfSection.classList.remove('hidden');
@@ -842,20 +1097,15 @@
             document.getElementById('nextBtn').disabled = (currentScenarioIndex === scenarios.length - 1);
             document.getElementById('deleteBtn').disabled = (scenarios.length <= 1);
             document.getElementById('compareBtn').disabled = (scenarios.length <= 1);
-            
-            // Debug-Ausgabe
-            console.log(`Update Buttons: ${scenarios.length} Szenarien, Compare Button disabled: ${scenarios.length <= 1}`);
         }
 
         function calculateScenario() {
             saveCurrentScenario();
             const scenario = scenarios[currentScenarioIndex];
             
-            // Calculate effective rate (TER already reduces return) - LIKE C VERSION
             scenario.effectiveRate = scenario.grossReturnPercent - scenario.terPercent;
             scenario.monthlyRate = scenario.effectiveRate / 12.0 / 100.0;
 
-            // Apply insurance tax
             if (scenario.insuranceTax) {
                 scenario.effectiveInitial = scenario.initialInvestment * 0.96;
                 scenario.effectiveMonthly = scenario.monthlySavings * 0.96;
@@ -867,7 +1117,6 @@
                 scenario.totalInsuranceTax = 0;
             }
 
-            // Initialize tracking arrays (like C version)
             scenario.yearlyCapital = [scenario.effectiveInitial];
             scenario.yearlyPayments = [scenario.effectiveInitial];
             scenario.yearlyGrossGains = [0];
@@ -880,31 +1129,17 @@
             let cumulativeTaxableGains = 0;
             let cumulativeTerFees = 0;
 
-            // Debug-Header für KESt-Berechnung (like C version)
-            if (scenario.capitalGainsTax) {
-                console.log(`🇦🇹 KESt-Berechnung für ${scenario.name}:`);
-                console.log(`ETF-Typ: ${scenario.taxRate*100}% KESt-Satz`);
-            }
-
-            // Monthly calculation (CORRECTED like C version)
             for (let month = 1; month <= scenario.durationYears * 12; month++) {
-                // Add monthly savings
                 capital += scenario.effectiveMonthly;
                 totalPaid += scenario.effectiveMonthly;
-                
-                // Apply growth (TER is already included in effective rate reduction)
                 capital *= (1 + scenario.monthlyRate);
                 
-                // Store yearly values and calculate TER/KESt (like C version)
                 if (month % 12 === 0) {
                     const year = month / 12;
-                    
-                    // TER calculation on average capital during the year (EXACTLY LIKE C VERSION)
                     const averageCapitalThisYear = (scenario.yearlyCapital[year - 1] + capital) / 2.0;
                     const yearlyTerFee = averageCapitalThisYear * (scenario.terPercent / 100.0);
                     cumulativeTerFees += yearlyTerFee;
                     
-                    // Net gain calculation (like C version)
                     const yearlyPaymentsIncrease = scenario.effectiveMonthly * 12;
                     const yearlyNetGain = capital - scenario.yearlyCapital[year - 1] - yearlyPaymentsIncrease;
                     
@@ -914,51 +1149,29 @@
                     scenario.yearlyTerFees[year] = cumulativeTerFees;
                     
                     let yearlyTax = 0;
-                    
-                    // 🇦🇹 Austrian KESt calculation (like C version)
                     if (scenario.capitalGainsTax && yearlyNetGain > 0) {
                         yearlyTax = yearlyNetGain * scenario.taxRate;
                         cumulativeYearlyTax += yearlyTax;
                         cumulativeTaxableGains += yearlyNetGain;
-                        
-                        // Debug output (like C version)
-                        console.log(`Jahr ${year}: Brutto-Ertrag=${yearlyNetGain.toFixed(2)}€, KESt=${yearlyTax.toFixed(2)}€`);
                     }
                     
                     scenario.yearlyTax[year] = yearlyTax;
                 }
             }
 
-            // Final calculations (like C version)
             scenario.finalCapital = capital;
             scenario.totalPayments = totalPaid;
             scenario.profit = capital - totalPaid;
             scenario.totalYearlyTax = cumulativeYearlyTax;
             scenario.totalTerFees = cumulativeTerFees;
             scenario.totalTaxableGains = cumulativeTaxableGains;
-            scenario.actualInvestedAmount = totalPaid - scenario.totalInsuranceTax;
 
-            // 🇦🇹 Austrian KESt final calculation (like C version)
             if (scenario.capitalGainsTax) {
                 const totalGain = scenario.profit;
-                
-                // Verkaufs-KESt on remaining untaxed gains (like C version)
                 const remainingGain = totalGain - cumulativeTaxableGains;
                 scenario.finalSaleTax = (remainingGain > 0) ? remainingGain * scenario.taxRate : 0;
-                
-                // Total KESt
                 scenario.totalTax = cumulativeYearlyTax + scenario.finalSaleTax;
                 scenario.netFinalValue = capital - scenario.totalTax;
-                
-                // Debug output (like C version)
-                console.log(`🇦🇹 KESt-Zusammenfassung:`);
-                console.log(`Gesamtgewinn: ${totalGain.toFixed(2)}€`);
-                console.log(`Bereits versteuerte Erträge: ${cumulativeTaxableGains.toFixed(2)}€`);
-                console.log(`Zusätzlich steuerpflichtiger Gewinn: ${remainingGain.toFixed(2)}€`);
-                console.log(`Unterjährige KESt: ${cumulativeYearlyTax.toFixed(2)}€`);
-                console.log(`Verkaufs-KESt: ${scenario.finalSaleTax.toFixed(2)}€`);
-                console.log(`Gesamt-KESt: ${scenario.totalTax.toFixed(2)}€`);
-                console.log(`Effektiver KESt-Satz: ${((scenario.totalTax / totalGain) * 100).toFixed(1)}%`);
             } else {
                 scenario.totalTax = 0;
                 scenario.finalSaleTax = 0;
@@ -968,14 +1181,20 @@
             displayResults(scenario);
         }
 
-        function calculateScenarioForComparison(scenario) {
-            // EXACT SAME LOGIC AS calculateScenario() - no differences!
+        function compareScenarios() {
+            saveCurrentScenario();
             
-            // Calculate effective rate (TER already reduces return) - LIKE C VERSION
+            scenarios.forEach((scenario, index) => {
+                calculateScenarioForComparison(scenario);
+            });
+            
+            createComparisonView();
+        }
+
+        function calculateScenarioForComparison(scenario) {
             scenario.effectiveRate = scenario.grossReturnPercent - scenario.terPercent;
             scenario.monthlyRate = scenario.effectiveRate / 12.0 / 100.0;
 
-            // Apply insurance tax
             if (scenario.insuranceTax) {
                 scenario.effectiveInitial = scenario.initialInvestment * 0.96;
                 scenario.effectiveMonthly = scenario.monthlySavings * 0.96;
@@ -987,7 +1206,6 @@
                 scenario.totalInsuranceTax = 0;
             }
 
-            // Initialize tracking arrays (like C version)
             scenario.yearlyCapital = [scenario.effectiveInitial];
             scenario.yearlyPayments = [scenario.effectiveInitial];
             scenario.yearlyGrossGains = [0];
@@ -1000,25 +1218,17 @@
             let cumulativeTaxableGains = 0;
             let cumulativeTerFees = 0;
 
-            // Monthly calculation (IDENTICAL to calculateScenario)
             for (let month = 1; month <= scenario.durationYears * 12; month++) {
-                // Add monthly savings
                 capital += scenario.effectiveMonthly;
                 totalPaid += scenario.effectiveMonthly;
-                
-                // Apply growth (TER is already included in effective rate reduction)
                 capital *= (1 + scenario.monthlyRate);
                 
-                // Store yearly values and calculate TER/KESt (like C version)
                 if (month % 12 === 0) {
                     const year = month / 12;
-                    
-                    // TER calculation on average capital during the year (EXACTLY LIKE C VERSION)
                     const averageCapitalThisYear = (scenario.yearlyCapital[year - 1] + capital) / 2.0;
                     const yearlyTerFee = averageCapitalThisYear * (scenario.terPercent / 100.0);
                     cumulativeTerFees += yearlyTerFee;
                     
-                    // Net gain calculation (like C version)
                     const yearlyPaymentsIncrease = scenario.effectiveMonthly * 12;
                     const yearlyNetGain = capital - scenario.yearlyCapital[year - 1] - yearlyPaymentsIncrease;
                     
@@ -1028,8 +1238,6 @@
                     scenario.yearlyTerFees[year] = cumulativeTerFees;
                     
                     let yearlyTax = 0;
-                    
-                    // 🇦🇹 Austrian KESt calculation (like C version)
                     if (scenario.capitalGainsTax && yearlyNetGain > 0) {
                         yearlyTax = yearlyNetGain * scenario.taxRate;
                         cumulativeYearlyTax += yearlyTax;
@@ -1040,16 +1248,13 @@
                 }
             }
 
-            // Final calculations (IDENTICAL to calculateScenario)
             scenario.finalCapital = capital;
             scenario.totalPayments = totalPaid;
             scenario.profit = capital - totalPaid;
             scenario.totalYearlyTax = cumulativeYearlyTax;
             scenario.totalTerFees = cumulativeTerFees;
             scenario.totalTaxableGains = cumulativeTaxableGains;
-            scenario.actualInvestedAmount = totalPaid - scenario.totalInsuranceTax;
 
-            // 🇦🇹 Austrian KESt final calculation (like C version)
             if (scenario.capitalGainsTax) {
                 const totalGain = scenario.profit;
                 const remainingGain = totalGain - cumulativeTaxableGains;
@@ -1061,19 +1266,6 @@
                 scenario.finalSaleTax = 0;
                 scenario.netFinalValue = capital;
             }
-        }
-
-        function compareScenarios() {
-            // Aktuelles Szenario ZUERST speichern
-            saveCurrentScenario();
-            
-            // Alle Szenarien berechnen OHNE currentScenarioIndex zu ändern
-            scenarios.forEach((scenario, index) => {
-                // Direkte Berechnung ohne Index-Wechsel
-                calculateScenarioForComparison(scenario);
-            });
-            
-            createComparisonView();
         }
 
         function createComparisonView() {
@@ -1085,7 +1277,6 @@
                 document.querySelector('.main-content').appendChild(comparisonSection);
             }
             
-            // Szenarien nach Netto-Endwert sortieren (für Ranking)
             const sortedScenarios = [...scenarios].sort((a, b) => b.netFinalValue - a.netFinalValue);
             const bestScenario = sortedScenarios[0];
             
@@ -1124,13 +1315,13 @@
                             
                             return `
                                 <tr class="${rankClass}">
-                                    <td>${rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : rank}</td>
-                                    <td>${scenario.name}</td>
-                                    <td>${formatCurrency(scenario.netFinalValue)}</td>
-                                    <td>${(scenario.netFinalValue / scenario.totalPayments).toFixed(2)}</td>
-                                    <td>${formatCurrency(scenario.totalTax)}</td>
-                                    <td>${formatCurrency(scenario.totalTerFees)}</td>
-                                    <td>${bewertung}</td>
+                                    <td data-label="Rang">${rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : rank}</td>
+                                    <td data-label="Szenario">${scenario.name}</td>
+                                    <td data-label="Netto-Endwert">${formatCurrency(scenario.netFinalValue)}</td>
+                                    <td data-label="Rendite-Faktor">${(scenario.netFinalValue / scenario.totalPayments).toFixed(2)}</td>
+                                    <td data-label="Gesamt-KESt">${formatCurrency(scenario.totalTax)}</td>
+                                    <td data-label="TER-Gebühren">${formatCurrency(scenario.totalTerFees)}</td>
+                                    <td data-label="Bewertung">${bewertung}</td>
                                 </tr>
                             `;
                         }).join('')}
@@ -1157,71 +1348,24 @@
                     <tbody>
                         ${scenarios.map(scenario => `
                             <tr>
-                                <td>${scenario.name}</td>
-                                <td>${scenario.durationYears} Jahre</td>
-                                <td>${scenario.grossReturnPercent}%</td>
-                                <td>${scenario.terPercent}%</td>
-                                <td>${formatCurrency(scenario.totalPayments)}</td>
-                                <td>${formatCurrency(scenario.finalCapital)}</td>
-                                <td>${formatCurrency(scenario.totalTax)}</td>
-                                <td>${formatCurrency(scenario.totalTerFees)}</td>
-                                <td>${formatCurrency(scenario.totalInsuranceTax)}</td>
-                                <td>${formatCurrency(scenario.netFinalValue)}</td>
-                                <td>${(scenario.netFinalValue / scenario.totalPayments).toFixed(2)}</td>
+                                <td data-label="Szenario">${scenario.name}</td>
+                                <td data-label="Laufzeit">${scenario.durationYears} Jahre</td>
+                                <td data-label="Brutto-Rendite">${scenario.grossReturnPercent}%</td>
+                                <td data-label="TER">${scenario.terPercent}%</td>
+                                <td data-label="Einzahlung">${formatCurrency(scenario.totalPayments)}</td>
+                                <td data-label="Brutto-Endwert">${formatCurrency(scenario.finalCapital)}</td>
+                                <td data-label="Gesamt-KESt">${formatCurrency(scenario.totalTax)}</td>
+                                <td data-label="TER-Gebühren">${formatCurrency(scenario.totalTerFees)}</td>
+                                <td data-label="Versicherungssteuer">${formatCurrency(scenario.totalInsuranceTax)}</td>
+                                <td data-label="Netto-Endwert">${formatCurrency(scenario.netFinalValue)}</td>
+                                <td data-label="Rendite-Faktor">${(scenario.netFinalValue / scenario.totalPayments).toFixed(2)}</td>
                             </tr>
                         `).join('')}
                     </tbody>
                 </table>
-
-                <h3>💸 Gebühren-Aufschlüsselung</h3>
-                <div class="fee-breakdown">
-                    ${scenarios.map(scenario => `
-                        <div class="fee-card">
-                            <h4>${scenario.name}</h4>
-                            <div class="fee-item">
-                                <span>Einzahlungen:</span>
-                                <span>${formatCurrency(scenario.totalPayments)}</span>
-                            </div>
-                            <div class="fee-item">
-                                <span>TER-Gebühren:</span>
-                                <span>${formatCurrency(scenario.totalTerFees)} (${((scenario.totalTerFees/scenario.totalPayments)*100).toFixed(2)}%)</span>
-                            </div>
-                            <div class="fee-item">
-                                <span>Versicherungssteuer:</span>
-                                <span>${formatCurrency(scenario.totalInsuranceTax)}</span>
-                            </div>
-                            <div class="fee-item">
-                                <span>KESt:</span>
-                                <span>${formatCurrency(scenario.totalTax)} (${scenario.profit > 0 ? ((scenario.totalTax/scenario.profit)*100).toFixed(1) : 0}% vom Gewinn)</span>
-                            </div>
-                            <div class="fee-item" style="border-top: 2px solid #8e44ad; font-weight: bold;">
-                                <span>Gesamt-Kosten:</span>
-                                <span>${formatCurrency(scenario.totalTerFees + scenario.totalInsuranceTax + scenario.totalTax)}</span>
-                            </div>
-                            <div class="fee-item" style="font-weight: bold; color: #8e44ad;">
-                                <span>Netto-Rendite:</span>
-                                <span>${((scenario.netFinalValue / scenario.totalPayments - 1) * 100).toFixed(2)}%</span>
-                            </div>
-                        </div>
-                    `).join('')}
-                </div>
-
-                <div class="pie-section">
-                    <h3>🥧 Gebührenverteilung - Tortendiagramme</h3>
-                    <div class="pie-grid">
-                        ${scenarios.map((scenario, index) => `
-                            <div class="pie-container">
-                                <h4>${scenario.name}</h4>
-                                <p style="color: #666; margin: 5px 0;">Rendite-Faktor: ${(scenario.netFinalValue / scenario.totalPayments).toFixed(2)}</p>
-                                <canvas id="pieChart${index}"></canvas>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
             `;
             
             createComparisonChart();
-            createPieCharts();
         }
 
         function createComparisonChart() {
@@ -1233,9 +1377,7 @@
             const years = Array.from({length: maxYears + 1}, (_, i) => i);
             
             const colors = ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 206, 86)', 
-                           'rgb(75, 192, 192)', 'rgb(153, 102, 255)', 'rgb(255, 159, 64)',
-                           'rgb(199, 199, 199)', 'rgb(83, 102, 255)', 'rgb(255, 99, 255)',
-                           'rgb(99, 255, 132)', 'rgb(255, 132, 99)', 'rgb(132, 99, 255)'];
+                           'rgb(75, 192, 192)', 'rgb(153, 102, 255)', 'rgb(255, 159, 64)'];
             
             const datasets = scenarios.map((scenario, index) => {
                 const data = [...scenario.yearlyCapital];
@@ -1260,118 +1402,39 @@
                 data: { labels: years, datasets: datasets },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: false,  // ← Wichtig für variable Höhe
+                    maintainAspectRatio: false,
                     plugins: {
                         legend: { 
                             display: true, 
-                            position: 'top',
-                            labels: {
-                                padding: 20,
-                                font: { size: 12 }
-                            }
+                            position: 'top'
                         }
                     },
                     scales: {
                         x: {
-                            title: { display: true, text: '📅 Jahre', font: { size: 14, weight: 'bold' } },
-                            grid: { display: true, color: '#e0e0e0' }
+                            title: { display: true, text: '📅 Jahre' }
                         },
                         y: {
-                            title: { display: true, text: '💰 Kapital (€)', font: { size: 14, weight: 'bold' } },
-                            grid: { display: true, color: '#e0e0e0' },
+                            title: { display: true, text: '💰 Kapital (€)' },
                             ticks: {
-                                callback: function(value) {
+                                callback: function(value, index, values) {
                                     return formatCurrency(value);
                                 }
                             }
-                        }
-                    },
-                    elements: {
-                        point: {
-                            radius: 4,
-                            hoverRadius: 8
-                        },
-                        line: {
-                            borderWidth: 3
                         }
                     }
                 }
             });
         }
 
-        function createPieCharts() {
-            scenarios.forEach((scenario, index) => {
-                const ctx = document.getElementById(`pieChart${index}`).getContext('2d');
-                
-                // Berechne die effektiv investierte Menge (ohne Versicherungssteuer)
-                const actualInvestedAmount = scenario.totalPayments - scenario.totalInsuranceTax;
-                
-                new Chart(ctx, {
-                    type: 'pie',
-                    data: {
-                        labels: ['💰 Real investiert', '📊 TER-Gebühren', '🏦 Versicherungssteuer', '💸 Kapitalertragssteuer'],
-                        datasets: [{
-                            data: [
-                                actualInvestedAmount,
-                                scenario.totalTerFees,
-                                scenario.totalInsuranceTax,
-                                scenario.totalTax
-                            ],
-                            backgroundColor: ['#4CAF50', '#FF9800', '#F44336', '#9C27B0'],
-                            borderWidth: 2,
-                            borderColor: '#fff'
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: { 
-                                position: 'bottom',
-                                labels: { 
-                                    padding: 15, 
-                                    usePointStyle: true,
-                                    font: { size: 11 }
-                                }
-                            },
-                            tooltip: {
-                                callbacks: {
-                                    label: function(context) {
-                                        const value = context.parsed;
-                                        const total = actualInvestedAmount + scenario.totalTerFees + scenario.totalInsuranceTax + scenario.totalTax;
-                                        const percentage = ((value / total) * 100).toFixed(1);
-                                        return context.label + ': ' + formatCurrency(value) + ' (' + percentage + '%)';
-                                    }
-                                }
-                            }
-                        }
-                    }
-                });
-            });
-        }
-
         function displayResults(scenario) {
             document.getElementById('resultsContainer').classList.remove('hidden');
 
-            // Erweiterte Anzeige (wie in C-Version)
             document.getElementById('netFinalValue').textContent = formatCurrency(scenario.netFinalValue);
             document.getElementById('returnFactor').textContent = (scenario.netFinalValue / scenario.totalPayments).toFixed(2);
-            
-            // Gesamt-KESt vereinfacht anzeigen (ohne Verkaufs-KESt)
-            const totalTaxText = formatCurrency(scenario.totalTax);
-            document.getElementById('totalTax').textContent = totalTaxText;
+            document.getElementById('totalTax').textContent = formatCurrency(scenario.totalTax);
             
             const effectiveTaxRate = scenario.profit > 0 ? (scenario.totalTax / scenario.profit) * 100 : 0;
             document.getElementById('effectiveTaxRate').textContent = effectiveTaxRate.toFixed(1) + '%';
-
-            // Debug-Informationen in Console (wie in C-Version)
-            console.log(`📊 ${scenario.name} - Zusammenfassung:`);
-            console.log(`Einzahlungen: ${formatCurrency(scenario.totalPayments)}`);
-            console.log(`TER-Gebühren: ${formatCurrency(scenario.totalTerFees)}`);
-            console.log(`Versicherungssteuer: ${formatCurrency(scenario.totalInsuranceTax)}`);
-            console.log(`Brutto-Endwert: ${formatCurrency(scenario.finalCapital)}`);
-            console.log(`Netto-Endwert: ${formatCurrency(scenario.netFinalValue)}`);
-            console.log(`Gesamt-Gewinn: ${formatCurrency(scenario.profit)}`);
 
             createChart(scenario);
             createYearlyTable(scenario);
@@ -1389,14 +1452,13 @@
                 data: {
                     labels: years,
                     datasets: [{
-                        label: `📈 ${scenario.name} (Brutto vor KESt)`,
+                        label: 'Kapitalentwicklung',
                         data: scenario.yearlyCapital,
-                        borderColor: 'rgb(75, 192, 192)',
-                        backgroundColor: 'rgba(75, 192, 192, 0.1)',
+                        borderColor: 'rgb(142, 68, 173)',
+                        backgroundColor: 'rgba(142, 68, 173, 0.1)',
                         fill: true,
-                        tension: 0.3,
+                        tension: 0.4,
                         pointRadius: 4,
-                        pointHoverRadius: 8,
                         borderWidth: 3
                     }]
                 },
@@ -1404,18 +1466,16 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: { display: true, position: 'top' }
+                        legend: { display: false }
                     },
                     scales: {
                         x: {
-                            title: { display: true, text: '📅 Jahre', font: { size: 14, weight: 'bold' } },
-                            grid: { display: true, color: '#e0e0e0' }
+                            title: { display: true, text: '📅 Jahre' }
                         },
                         y: {
-                            title: { display: true, text: '💰 Kapital (€)', font: { size: 14, weight: 'bold' } },
-                            grid: { display: true, color: '#e0e0e0' },
+                            title: { display: true, text: '💰 Kapital (€)' },
                             ticks: {
-                                callback: function(value) {
+                                callback: function(value, index, values) {
                                     return formatCurrency(value);
                                 }
                             }
@@ -1436,67 +1496,15 @@
                 row.insertCell(2).textContent = formatCurrency(scenario.yearlyGrossGains[year] || 0);
                 row.insertCell(3).textContent = formatCurrency(scenario.yearlyTax[year] || 0);
                 row.insertCell(4).textContent = formatCurrency(scenario.yearlyCapital[year] || 0);
-                
-                // Optional: TER-Gebühren als Tooltip
-                if (scenario.yearlyTerFees && scenario.yearlyTerFees[year]) {
-                    row.cells[4].title = `TER-Gebühren bis Jahr ${year}: ${formatCurrency(scenario.yearlyTerFees[year])}`;
-                }
             }
-        }
-
-        function createChart(scenario) {
-            const ctx = document.getElementById('capitalChart').getContext('2d');
-            
-            if (chart) chart.destroy();
-
-            const years = Array.from({length: scenario.durationYears + 1}, (_, i) => i);
-            
-            chart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: years,
-                    datasets: [{
-                        label: `📈 ${scenario.name} (Brutto vor KESt)`,
-                        data: scenario.yearlyCapital,
-                        borderColor: 'rgb(75, 192, 192)',
-                        backgroundColor: 'rgba(75, 192, 192, 0.1)',
-                        fill: true,
-                        tension: 0.3,
-                        pointRadius: 4,
-                        pointHoverRadius: 8,
-                        borderWidth: 3
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: true, position: 'top' }
-                    },
-                    scales: {
-                        x: {
-                            title: { display: true, text: '📅 Jahre', font: { size: 14, weight: 'bold' } },
-                            grid: { display: true, color: '#e0e0e0' }
-                        },
-                        y: {
-                            title: { display: true, text: '💰 Kapital (€)', font: { size: 14, weight: 'bold' } },
-                            grid: { display: true, color: '#e0e0e0' },
-                            ticks: {
-                                callback: function(value) {
-                                    return formatCurrency(value);
-                                }
-                            }
-                        }
-                    }
-                }
-            });
         }
 
         function formatCurrency(value) {
             return new Intl.NumberFormat('de-DE', {
                 style: 'currency',
                 currency: 'EUR',
-                minimumFractionDigits: 0
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
             }).format(value);
         }
 
@@ -1506,20 +1514,27 @@
             if (relativePerformance >= 0.98) return "🌟 Exzellent";
             if (relativePerformance >= 0.95) return "✅ Sehr gut";
             if (relativePerformance >= 0.90) return "👍 Gut";
-            if (relativePerformance >= 0.85) return "⚠️ Befriedigend";
-            return "❌ Verbesserungsbedürftig";
+            if (relativePerformance >= 0.80) return "⚠️ Akzeptabel";
+            return "❌ Schwach";
         }
 
         function debugScenarios() {
-            console.log("=== SCENARIO DEBUG ===");
-            console.log(`Current Index: ${currentScenarioIndex}`);
-            console.log(`Total Scenarios: ${scenarios.length}`);
+            console.log("🐛 Debug-Informationen:");
+            console.log(`Anzahl Szenarien: ${scenarios.length}`);
             scenarios.forEach((scenario, index) => {
-                console.log(`Index ${index}: ${scenario.name} - Sparrate: ${scenario.monthlySavings}€ - KESt: ${scenario.capitalGainsTax}`);
+                console.log(`Szenario ${index + 1}: ${scenario.name}`);
+                console.log(`  - Einzahlung: ${scenario.initialInvestment}€ + ${scenario.monthlySavings}€/Monat`);
+                console.log(`  - Laufzeit: ${scenario.durationYears} Jahre`);
+                console.log(`  - Brutto-Rendite: ${scenario.grossReturnPercent}%`);
+                console.log(`  - TER: ${scenario.terPercent}%`);
+                console.log(`  - KESt: ${scenario.capitalGainsTax ? 'Ja' : 'Nein'}`);
+                console.log(`  - Versicherungssteuer: ${scenario.insuranceTax ? 'Ja' : 'Nein'}`);
+                if (scenario.netFinalValue) {
+                    console.log(`  - Netto-Endwert: ${formatCurrency(scenario.netFinalValue)}`);
+                }
+                console.log('---');
             });
-            console.log("=====================");
         }
-        
     </script>
 </body>
 </html>
