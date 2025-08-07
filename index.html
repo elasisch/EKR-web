@@ -462,164 +462,247 @@
         /* Mobile Styles */
         @media (max-width: 768px) {
             body {
-                padding: 10px;
+                padding: 5px;
+                font-size: 14px;
             }
             
             .container {
                 border-radius: 10px;
                 margin: 0;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
             }
             
             .header {
-                padding: 20px 15px;
+                padding: 15px 10px;
             }
             
             .header h1 {
-                font-size: 1.8em;
-                margin-bottom: 8px;
+                font-size: 1.6em;
+                margin-bottom: 5px;
+                line-height: 1.2;
             }
             
             .header p {
-                font-size: 1em;
+                font-size: 0.9em;
             }
             
             .main-content {
                 grid-template-columns: 1fr;
-                gap: 20px;
-                padding: 20px 15px;
+                gap: 15px;
+                padding: 15px 10px;
             }
             
             .input-section {
-                padding: 20px 15px;
+                padding: 15px 10px;
             }
             
             .scenario-controls {
                 flex-direction: column;
                 align-items: stretch;
-                gap: 10px;
+                gap: 8px;
             }
             
             .scenario-controls button {
                 width: 100%;
+                padding: 12px;
+                font-size: 14px;
                 margin-bottom: 5px;
+            }
+            
+            .scenario-controls span {
+                text-align: center;
+                font-size: 0.9em;
+                padding: 8px;
+                background: #f8f9fa;
+                border-radius: 5px;
             }
             
             .scenario-navigation {
                 flex-direction: column;
-                gap: 10px;
-                padding: 15px 10px;
+                gap: 8px;
+                padding: 12px 8px;
             }
             
             .scenario-navigation button {
                 width: 100%;
-                padding: 12px 15px;
+                padding: 12px;
+                font-size: 14px;
             }
             
             #scenarioSelector {
                 width: 100%;
                 max-width: none;
                 margin: 5px 0;
+                padding: 12px;
+                font-size: 14px;
+            }
+            
+            .input-group {
+                margin-bottom: 15px;
+            }
+            
+            .input-group label {
+                font-size: 14px;
+                margin-bottom: 6px;
             }
             
             .input-group input, .input-group select {
                 font-size: 16px;
-                padding: 14px;
+                padding: 14px 12px;
+                border-radius: 6px;
             }
             
             .calculate-btn {
                 font-size: 16px;
-                padding: 18px;
+                padding: 16px;
+                border-radius: 8px;
             }
             
+            .checkbox-group {
+                margin-bottom: 12px;
+            }
+            
+            .checkbox-group label {
+                font-size: 14px;
+            }
+            
+            .etf-type-group {
+                margin-left: 5px;
+                padding: 10px;
+                font-size: 0.9em;
+            }
+            
+            .kest-info {
+                padding: 10px;
+                font-size: 0.8em;
+            }
+            
+            .kest-info p {
+                font-size: 0.8em;
+                line-height: 1.3;
+            }
+            
+            /* Results Section Mobile */
             .summary-cards {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 15px;
+                gap: 10px;
+                margin-bottom: 20px;
             }
             
             .summary-card {
-                padding: 15px 10px;
+                padding: 12px 8px;
+                border-radius: 10px;
+            }
+            
+            .summary-card h3 {
+                font-size: 0.8em;
+                margin-bottom: 6px;
             }
             
             .summary-card .value {
-                font-size: 1.4em;
+                font-size: 1.3em;
+                line-height: 1.1;
             }
             
             .chart-container {
-                padding: 15px 10px;
+                padding: 12px 8px;
+                border-radius: 10px;
+                margin-bottom: 20px;
+            }
+            
+            .chart-container h3 {
+                font-size: 1.1em;
+                margin-bottom: 15px;
             }
             
             .yearly-table h3 {
-                padding: 15px;
+                padding: 12px;
                 font-size: 1.1em;
             }
             
+            .yearly-table {
+                border-radius: 10px;
+            }
+            
             table {
-                font-size: 0.9em;
+                font-size: 0.8em;
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
             }
             
             th, td {
                 padding: 8px 4px;
+                font-size: 0.8em;
+                min-width: 80px;
             }
             
+            th:first-child, td:first-child {
+                min-width: 40px;
+            }
+            
+            /* Comparison Section Mobile */
             .comparison-section {
-                padding: 20px 15px;
+                padding: 15px 10px;
                 margin-top: 20px;
+                border-radius: 10px;
             }
             
-            .comparison-table {
+            .comparison-section h2 {
+                font-size: 1.4em;
+                margin-bottom: 15px;
+                text-align: center;
+            }
+            
+            .comparison-section h3 {
+                font-size: 1.2em;
+                margin: 20px 0 15px 0;
+                text-align: center;
+            }
+            
+            .best-scenario {
+                padding: 12px;
+                margin: 15px 0;
+                border-radius: 8px;
+                font-size: 0.9em;
+            }
+            
+            .best-scenario h3 {
+                font-size: 1.1em;
+                margin-bottom: 8px;
+            }
+            
+            .comparison-chart-container {
+                height: 250px;
+                padding: 12px 8px;
+                margin-bottom: 20px;
+                border-radius: 10px;
+            }
+            
+            .comparison-chart-container h3 {
+                font-size: 1.1em;
+                margin-bottom: 10px;
+            }
+            
+            .comparison-chart-container canvas {
+                max-height: 200px;
+            }
+            
+            /* Mobile Table Optimizations */
+            .comparison-table,
+            .ranking-table {
                 font-size: 0.8em;
                 overflow-x: auto;
                 display: block;
                 white-space: nowrap;
+                border-radius: 8px;
             }
             
             .comparison-table thead,
             .comparison-table tbody,
             .comparison-table th,
             .comparison-table td,
-            .comparison-table tr {
-                display: block;
-            }
-            
-            .comparison-table thead tr {
-                position: absolute;
-                top: -9999px;
-                left: -9999px;
-            }
-            
-            .comparison-table tr {
-                border: 1px solid #ccc;
-                margin-bottom: 10px;
-                padding: 10px;
-                border-radius: 5px;
-                background: white;
-            }
-            
-            .comparison-table td {
-                border: none;
-                position: relative;
-                padding: 8px 8px 8px 25%;
-                text-align: left;
-                white-space: normal;
-            }
-            
-            .comparison-table td:before {
-                content: attr(data-label) ": ";
-                position: absolute;
-                left: 6px;
-                width: 20%;
-                padding-right: 10px;
-                white-space: nowrap;
-                font-weight: bold;
-                color: #8e44ad;
-            }
-            
-            .ranking-table {
-                display: block;
-                overflow-x: auto;
-                white-space: nowrap;
-            }
-            
+            .comparison-table tr,
             .ranking-table thead,
             .ranking-table tbody,
             .ranking-table th,
@@ -628,123 +711,200 @@
                 display: block;
             }
             
+            .comparison-table thead tr,
             .ranking-table thead tr {
                 position: absolute;
                 top: -9999px;
                 left: -9999px;
             }
             
+            .comparison-table tr,
             .ranking-table tr {
-                border: 1px solid #ccc;
-                margin-bottom: 10px;
+                border: 1px solid #ddd;
+                margin-bottom: 8px;
                 padding: 10px;
-                border-radius: 5px;
+                border-radius: 6px;
                 background: white;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             }
             
+            .comparison-table td,
             .ranking-table td {
                 border: none;
                 position: relative;
-                padding: 8px 8px 8px 25%;
+                padding: 6px 6px 6px 30%;
                 text-align: left;
                 white-space: normal;
+                font-size: 0.9em;
+                line-height: 1.3;
             }
             
+            .comparison-table td:before,
             .ranking-table td:before {
                 content: attr(data-label) ": ";
                 position: absolute;
                 left: 6px;
-                width: 20%;
-                padding-right: 10px;
+                width: 25%;
+                padding-right: 8px;
                 white-space: nowrap;
                 font-weight: bold;
                 color: #8e44ad;
+                font-size: 0.85em;
             }
             
+            /* Fee Breakdown Mobile */
             .fee-breakdown {
                 grid-template-columns: 1fr;
-                gap: 15px;
+                gap: 12px;
             }
             
             .fee-card {
-                padding: 15px;
+                padding: 12px;
+                border-radius: 8px;
+                margin-bottom: 10px;
+            }
+            
+            .fee-card h4 {
+                font-size: 1.1em;
+                margin-bottom: 10px;
+            }
+            
+            .fee-item {
+                margin: 6px 0;
+                padding: 4px 0;
+                font-size: 0.9em;
+                line-height: 1.3;
+            }
+            
+            .fee-item span {
+                display: block;
+                margin-bottom: 2px;
+                font-size: 0.85em;
+            }
+            
+            .fee-item strong {
+                display: block;
+                font-size: 1em;
+            }
+            
+            /* Pie Charts Mobile */
+            .pie-section {
+                padding: 15px 10px;
+                margin-top: 20px;
+                border-radius: 10px;
+            }
+            
+            .pie-section h2 {
+                font-size: 1.4em;
+                margin-bottom: 15px;
+                text-align: center;
             }
             
             .pie-grid {
                 grid-template-columns: 1fr;
-                gap: 20px;
+                gap: 15px;
+                margin-top: 15px;
+            }
+            
+            .pie-container {
+                padding: 12px;
+                border-radius: 10px;
+                margin-bottom: 15px;
+            }
+            
+            .pie-container h4 {
+                font-size: 1.1em;
+                margin-bottom: 8px;
+            }
+            
+            .pie-container p {
+                font-size: 0.9em;
+                margin-bottom: 10px;
             }
             
             .pie-container canvas {
-                height: 250px !important;
-                max-height: 250px;
-            }
-            
-            .comparison-chart-container {
-                height: 300px;
-                padding: 15px 10px;
-            }
-            
-            .comparison-chart-container canvas {
-                max-height: 250px;
-            }
-            
-            .best-scenario {
-                padding: 15px;
-                font-size: 0.9em;
-            }
-            
-            .etf-type-group {
-                margin-left: 10px;
-                padding: 12px;
-            }
-            
-            .kest-info {
-                padding: 12px;
-                font-size: 0.85em;
+                height: 220px !important;
+                max-height: 220px;
             }
         }
 
         @media (max-width: 480px) {
+            body {
+                padding: 2px;
+                font-size: 13px;
+            }
+            
+            .header {
+                padding: 10px 8px;
+            }
+            
             .header h1 {
-                font-size: 1.5em;
+                font-size: 1.4em;
+                line-height: 1.2;
             }
             
             .header p {
-                font-size: 0.9em;
+                font-size: 0.8em;
+            }
+            
+            .main-content {
+                padding: 10px 5px;
+                gap: 10px;
+            }
+            
+            .input-section {
+                padding: 12px 8px;
+            }
+            
+            .input-group input, .input-group select {
+                padding: 12px 10px;
+                font-size: 16px;
             }
             
             .summary-cards {
                 grid-template-columns: 1fr;
+                gap: 8px;
             }
             
             .summary-card {
-                padding: 12px 8px;
+                padding: 10px 8px;
             }
             
             .summary-card h3 {
-                font-size: 0.8em;
+                font-size: 0.75em;
             }
             
             .summary-card .value {
-                font-size: 1.3em;
+                font-size: 1.2em;
             }
             
-            table {
+            .comparison-chart-container {
+                height: 200px;
+            }
+            
+            .comparison-chart-container canvas {
+                max-height: 150px;
+            }
+            
+            .pie-container canvas {
+                height: 180px !important;
+                max-height: 180px;
+            }
+            
+            .fee-item span {
                 font-size: 0.8em;
             }
             
-            th, td {
-                padding: 6px 2px;
+            .comparison-table td:before,
+            .ranking-table td:before {
+                font-size: 0.8em;
+                width: 28%;
             }
             
-            .input-group label {
-                font-size: 0.9em;
-            }
-            
-            .scenario-controls span {
-                font-size: 0.9em;
-                text-align: center;
+            .comparison-table td,
+            .ranking-table td {
+                padding: 5px 5px 5px 32%;
+                font-size: 0.85em;
             }
         }
     </style>
